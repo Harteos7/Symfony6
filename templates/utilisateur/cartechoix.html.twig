@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menus{% endblock %}
+
+{% block section %}
+<section class="fruit_section layout_padding-top">
+{% block body %}
+    <div class="container">
+
+      <h2 class="custom_heading">
+        {{ menu.nom }}
+      </h2>
+      <p class="custom_heading-text">
+        {{ menu.description }}
+      </p>
+
+        <div class="nourriture">
+        {% for catalogue in catalogues %}
+            {%include'produit.html.twig'%}
+        {% endfor %}
+
+        {% if previous >= 0 %}
+            <a href="{{ path('app_cartechoix', { id: menu.id, offset: previous }) }}">Previous</a>
+        {% endif %}
+        {% if next < catalogues|length %}
+            <a href="{{ path('app_cartechoix', { id: menu.id, offset: next }) }}">Next</a>
+        {% endif %}
+
+        </div>
+
+    </div>
+{% endblock %}
+</section>
+{% endblock %}

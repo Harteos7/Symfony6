@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forgot Password{% endblock %}
+
+{% block stylesheets %}
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="/build/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/build/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/build/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/build/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/build/css/main.css">
+<!--===============================================================================================-->
+{% endblock %}
+
+{% block section %}
+
+{% block body %}
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('/build/images/bg-01.jpg');">
+			<div class="wrap-login100">
+
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+
+					<span class="login100-form-title p-b-34 p-t-27">
+						Forgot Password
+					</span>
+
+                    {% if not app.user.userIdentifier is defined %}
+					<div class="wrap-input100 validate-input">
+                        <h class="input100"> tu as oublier ton mot de passe ? pas de bol</h>
+					</div>
+                    {% endif %}
+
+                    {% if app.user.userIdentifier is defined %}
+					{{ form_start(NewPassword) }}
+
+					<div class="wrap-input100 validate-input">
+                        <h class="input100"> Hello {{ app.user.userIdentifier }} <br> if you want you can change your password</h>
+					</div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+						{{ form_widget(NewPassword.plainPassword.first, {'attr': {'class': 'input100', 'placeholder': 'Password'}}) }}
+						{{ form_errors(NewPassword.plainPassword.first) }}
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter verify password">
+						{{ form_widget(NewPassword.plainPassword.second, {'attr': {'class': 'input100', 'placeholder': 'Verify your Password'}}) }}
+						{{ form_errors(NewPassword.plainPassword.second) }}
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
+					{{ form_end(NewPassword) }}
+                    {% endif %}
+
+
+
+
+                    <div class="container-login100-form-btn" >
+						<a class="login100-form-btn" href="#">
+							Change my password
+						</a>
+					</div>
+
+			</div>
+		</div>
+	</div>
+	<div id="dropDownSelect1"></div>
+
+{% endblock %}
+
+{% endblock %}

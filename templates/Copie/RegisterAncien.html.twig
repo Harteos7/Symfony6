@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in !{% endblock %}
+
+{% block body %}
+
+{{ form_start(registrationForm) }}
+    <h1>Register</h1>
+    {{ form_row(registrationForm.email)}}
+    {{ form_row(registrationForm.plainPassword.first, {
+        label: 'Password'
+    }) }}
+    <a href="#" class="txt2 bo1 m-l-5">
+    Forgot?
+    </a>
+
+    {{ form_row(registrationForm.plainPassword.second, {
+        label: 'Confirm password'
+    }) }}
+    {{ form_row(registrationForm.adresse) }}
+    {{ form_row(registrationForm.agreeTerms) }}
+    <br>
+    <button type="submit" class="btn btn-lg btn-primary" >validation</button>
+{{ form_end(registrationForm) }}
+
+{% endblock %}

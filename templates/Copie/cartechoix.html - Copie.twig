@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menu{% endblock %}
+
+{% block body %}
+    <div class="layout">
+    
+    <div class="nourriture">
+        <h1>Liste des articles</h1>
+    {% for catalogue in catalogues %}
+        {%include'produit.html.twig'%}
+    {% endfor %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menus{% endblock %}
+
+{% block body %}
+{% for menu in menus %}
+
+<a href="{{ path('app_cartechoix', { id: menu.id}) }}">
+    <img src={{ menu.image }} width="220px" />
+</a>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block stylesheets %}
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="/build/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/build/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/build/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/build/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/build/css/main.css">
+<!--===============================================================================================-->
+{% endblock %}
+
+{% block section %}
+
+{% block body %}
+
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('/build/images/bg-01.jpg');">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+
+					<span class="login100-form-title p-b-34 p-t-27">
+						Log in
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Enter email">
+                        <input class="input100" type="email" name="email" id="inputEmail" class="form-control" required autofocus placeholder= "Enter email">
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <input class="input100" type="password" name="password" id="inputPassword" class="form-control" required placeholder="Password">
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
+
+                        <input type="hidden" name="_csrf_token"
+                        value="{{ csrf_token('authenticate') }}"
+                        >
+
+                    <div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Login
+						</button>
+					</div><br>
+
+                    <div class="container-login100-form-btn" >
+						<a class="login100-form-btn" href="{{ path('app_register') }}">
+							Register
+						</a>
+					</div>               
+
+					<div class="text-center p-t-45">
+						<a class="txt1" href="{{ path('app_forgot') }}">
+							Forgot Password?
+						</a>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="dropDownSelect1"></div>
+
+</body>
+
+{% endblock %}
+
+{% endblock %}

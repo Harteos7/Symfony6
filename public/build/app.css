@@ -1,0 +1,35 @@
+/*!**************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[1].use[1]!./assets/styles/app.css ***!
+  \**************************************************************************************************************/
+    a,
+    a:focus {
+      text-decoration: none;
+      color: rgb(0, 0, 0);
+      font-weight: 300;
+      padding: 10px 30px;
+      text-align: center;
+    }
+
+    a:hover{
+      color: red;
+    }
+
+    .user {
+      background-image: repeating-linear-gradient(45deg, violet, indigo, green, yellow, orange, red, violet);
+      text-align: center;
+      background-size: 800% 800%;
+      background-clip: initial;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 20px;
+      animation: rainbow 4s ease infinite;
+    }
+
+    @keyframes rainbow { 
+      0%{background-position:0% 50%}
+      50%{background-position:100% 25%}
+      100%{background-position:0% 50%}
+    }
+
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLmNzcyIsIm1hcHBpbmdzIjoiOzs7QUFBQTtJQUNJLDJCQUEyQjtBQUMvQiIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL2Fzc2V0cy9zdHlsZXMvYXBwLmNzcyJdLCJzb3VyY2VzQ29udGVudCI6WyJib2R5IHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBsaWdodGdyYXk7XG59XG4iXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=*/
