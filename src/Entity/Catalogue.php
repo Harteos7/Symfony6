@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CatalogueRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CatalogueRepository::class)]
@@ -28,6 +30,14 @@ class Catalogue
     #[ORM\ManyToOne(inversedBy: 'catalogues')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Menu $menu = null;
+
+    #[ORM\OneToMany(mappedBy: 'catalogue_id', targetEntity: Panier::class)]
+    private Collection $paniers;
+
+    public function __construct()
+    {
+        $this->paniers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +100,36 @@ class Catalogue
     public function setMenu(?Menu $menu): self
     {
         $this->menu = $menu;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Panier>
+     */
+    public function getPaniers(): Collection
+    {
+        return $this->paniers;
+    }
+
+    public function addPanier(Panier $panier): self
+    {
+        if (!$this->paniers->contains($panier)) {
+            $this->paniers->add($panier);
+            $panier->setCatalogueId($this);
+        }
+
+        return $this;
+    }
+
+    public function removePanier(Panier $panier): self
+    {
+        if ($this->paniers->removeElement($panier)) {
+            // set the owning side to null (unless already changed)
+            if ($panier->getCatalogueId() === $this) {
+                $panier->setCatalogueId(null);
+            }
+        }
 
         return $this;
     }

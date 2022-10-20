@@ -272,10 +272,11 @@ a:focus {
 .carousel-inner,
 .carousel-item {
   height: 100%;
+  width: 100%;
 }
 
 .slider_section .custom_carousel-control {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 2%;
   width: 105px;

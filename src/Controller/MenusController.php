@@ -18,7 +18,6 @@ class MenusController extends AbstractController
         return $this->render('utilisateur/carte.html.twig', [
             'controller_name' => 'MenusController',           
             'menus' => $MenuRepository->findAll(), // on envoie toutes les menus (findAll) à la vue
-            'comp' => 1,
         ]);
     }
 }
