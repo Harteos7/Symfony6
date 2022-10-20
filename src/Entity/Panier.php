@@ -13,9 +13,6 @@ class Panier
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $numero = null;
-
     #[ORM\ManyToOne(inversedBy: 'user_panier')]
     #[ORM\JoinColumn(nullable: false)]
     private ?user $user_id = null;
@@ -28,19 +25,6 @@ class Panier
     {
         return $this->id;
     }
-
-    public function getNumero(): ?int
-    {
-        return $this->numero;
-    }
-
-    public function setNumero(int $numero): self
-    {
-        $this->numero = $numero;
-
-        return $this;
-    }
-
 
     public function getUserId(): ?user
     {

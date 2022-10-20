@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;  // pour la pagination
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment; 
-use App\Entity\Catalogue;
+use App\Entity\Panier;
 use App\Entity\Menu;
 use App\Form\NewPasswordFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -55,6 +55,7 @@ class UtilisateurController extends AbstractController
         $user = $this->getUser();
         $form = $this->createForm(NewPasswordFormType::class, $user);
         $form->handleRequest($request);
+        $panier = new Panier();// crée un panier
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
@@ -70,8 +71,15 @@ class UtilisateurController extends AbstractController
 
         }
 
+        if ($button->isSubmitted()) {
+            // faire un panier
+            $panier->setUserId(1);
+
+            $panier->setCatalogueId(1);
+
         return $this->render('utilisateur/forgot.html.twig', [
             'NewPassword' => $form->createView(),
         ]);
+        }
     }
 }
