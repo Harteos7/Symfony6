@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Logout{% endblock %}
+
+{% block stylesheets %}
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="/build/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/build/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/build/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/build/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/build/css/main.css">
+<!--===============================================================================================-->
+{% endblock %}
+
+{% block section %}
+
+{% block body %}
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('/build/images/bg-01.jpg');">
+			<div class="wrap-login100">
+
+                    {% if app.user.userIdentifier is defined %}
+
+					<div class="container-login100-form-btn" >
+						<a class="login100-form-btn" href="{{ path('app_logout') }}">
+							Logout
+						</a>
+					</div>
+					<br>
+					<div class="container-login100-form-btn" >
+						<a class="login100-form-btn" href="{{ path('app_forgot') }}" >
+							Change my password
+						</a>
+					</div>
+                    {% endif %}
+
+                    {% if not app.user.userIdentifier is defined %}
+					<div class="wrap-input100 validate-input">
+                        <img src="/build/images/bg-02.jpg" class="zmdi zmdi-landscape" width="250px" />
+					</div>
+
+					<div class="wrap-input100 validate-input">
+                        <h class="input100"> Comment tu es arrivé la toi ?</h>
+					</div>
+
+					<div class="container-login100-form-btn" >
+						<a class="login100-form-btn" href="{{ path('app_login') }}">
+							Login
+						</a>
+					</div>
+					{% endif %}
+
+			</div>
+		</div>
+	</div>
+	<div id="dropDownSelect1"></div>
+
+{% endblock %}
+
+{% endblock %}

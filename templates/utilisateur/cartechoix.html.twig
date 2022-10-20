@@ -13,20 +13,16 @@
       <p class="custom_heading-text">
         {{ menu.description }}
       </p>
-
-        <div class="nourriture">
         {% for catalogue in catalogues %}
             {%include'produit.html.twig'%}
         {% endfor %}
 
-        {% if previous >= 0 %}
-            <a href="{{ path('app_cartechoix', { id: menu.id, offset: previous }) }}">Previous</a>
-        {% endif %}
-        {% if next < catalogues|length %}
-            <a href="{{ path('app_cartechoix', { id: menu.id, offset: next }) }}">Next</a>
-        {% endif %}
-
-        </div>
+      {% if previous >= 0 %}
+          <a class="custom_dark-btn" href="{{ path('app_cartechoix', { id: menu.id, offset: previous }) }}">Previous</a>
+      {% endif %}
+      {% if next < catalogues|length %}
+          <a class="custom_dark-btn" href="{{ path('app_cartechoix', { id: menu.id, offset: next }) }}">Next</a>
+      {% endif %}
 
     </div>
 {% endblock %}

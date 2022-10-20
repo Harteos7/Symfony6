@@ -8,14 +8,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment; 
 use App\Entity\Catalogue;
 use App\Entity\Menu;
-use App\Entity\User;
 use App\Form\NewPasswordFormType;
-use App\Security\LoginAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Repository\CatalogueRepository; //pour pouvoir appeler la base de donnée Catalogue
 use App\Repository\MenuRepository; //pour pouvoir appeler la base de donnée Menu
 use App\Repository\UserRepository; //pour pouvoir appeler la base de donnée user
@@ -26,6 +22,14 @@ class UtilisateurController extends AbstractController
     public function index(): Response
     {
         return $this->render('utilisateur/index.html.twig', [
+            'controller_name' => 'UtilisateurController',
+        ]);
+    }
+
+    #[Route('/out', name: 'app_out')]
+    public function out(): Response
+    {
+        return $this->render('utilisateur/out.html.twig', [
             'controller_name' => 'UtilisateurController',
         ]);
     }
@@ -46,7 +50,7 @@ class UtilisateurController extends AbstractController
     }
 
     #[Route('/forgot', name: 'app_forgot')]
-    public function forgot(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, LoginAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function forgot(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(NewPasswordFormType::class, $user);
@@ -54,9 +58,9 @@ class UtilisateurController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
-            $this->$user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $this->$user,
+            $user->setPassword(
+                $userPasswordHasher->hashPassword( // on hassher le passeword : plainPassword
+                    $user,
                     $form->get('plainPassword')->getData()
                 )
             );

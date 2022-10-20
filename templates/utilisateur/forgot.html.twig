@@ -34,17 +34,23 @@
 					<div class="wrap-input100 validate-input">
                         <h class="input100"> tu as oublier ton mot de passe ? pas de bol</h>
 					</div>
+
+					<div class="container-login100-form-btn" >
+						<a class="login100-form-btn" href="{{ path('app_login') }}">
+							Login
+						</a>
+					</div>
                     {% endif %}
 
                     {% if app.user.userIdentifier is defined %}
 					{{ form_start(NewPassword) }}
 
 					<div class="wrap-input100 validate-input">
-                        <h class="input100"> Hello {{ app.user.userIdentifier }} <br> if you want you can change your password</h>
+                        <h class="input100"> Hello {{ app.user.userIdentifier }} <br> Here you can change your password</h>
 					</div>
 
                     <div class="wrap-input100 validate-input" data-validate="Enter password">
-						{{ form_widget(NewPassword.plainPassword.first, {'attr': {'class': 'input100', 'placeholder': 'Password'}}) }}
+						{{ form_widget(NewPassword.plainPassword.first, {'attr': {'class': 'input100', 'placeholder': 'New Password'}}) }}
 						{{ form_errors(NewPassword.plainPassword.first) }}
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
                     </div>
@@ -54,17 +60,14 @@
 						{{ form_errors(NewPassword.plainPassword.second) }}
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
-					{{ form_end(NewPassword) }}
-                    {% endif %}
-
-
-
 
                     <div class="container-login100-form-btn" >
-						<a class="login100-form-btn" href="#">
+						<button class="login100-form-btn" type="submit" >
 							Change my password
-						</a>
+						</button>
 					</div>
+					{{ form_end(NewPassword) }}
+					{% endif %}
 
 			</div>
 		</div>
