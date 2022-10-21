@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Catalogue;
+use App\Repository\PanierRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;  // pour la pagination
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment; 
 use App\Entity\Panier;
+use App\Entity\User;
 use App\Entity\Menu;
 use App\Form\NewPasswordFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -73,6 +76,23 @@ class UtilisateurController extends AbstractController
 
         return $this->render('utilisateur/forgot.html.twig', [
             'NewPassword' => $form->createView(),
+        ]);
+    }
+
+    #[Route(path: '/setp', name: 'app_setp')]
+    public function getp(User $user, Catalogue $catalogue, PanierRepository $panier, EntityManagerInterface $entityManager): Response
+    {
+        $panier = new Panier();
+        $user = $this->getUser();
+
+        $panier->setUserId($user);
+        $panier->setCatalogueId($catalogue);
+
+        $entityManager->persist($panier);
+        $entityManager->flush();
+
+        return $this->render('utilisateur/index.html.twig', [
+            'controller_name' => 'UtilisateurController',
         ]);
     }
 }

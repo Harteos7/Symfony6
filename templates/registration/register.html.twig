@@ -33,6 +33,13 @@
 						Log in !
 					</span>
 
+					<div class="wrap-input100 validate-input" data-validate="Enter name">
+						{{ form_widget(registrationForm.name, {'attr': {'class': 'input100', 'placeholder': 'Enter name'} }) }}
+						{{ form_errors(registrationForm.name) }}
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
+
+
 					<div class="wrap-input100 validate-input" data-validate="Enter email">
 						{{ form_widget(registrationForm.email, {'attr': {'class': 'input100', 'placeholder': 'Enter email'} }) }}
 						{{ form_errors(registrationForm.email) }}
