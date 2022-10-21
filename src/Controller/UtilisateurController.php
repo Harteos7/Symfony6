@@ -12,6 +12,7 @@ use App\Form\NewPasswordFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use App\Repository\CatalogueRepository; //pour pouvoir appeler la base de donnée Catalogue
 use App\Repository\MenuRepository; //pour pouvoir appeler la base de donnée Menu
 use App\Repository\UserRepository; //pour pouvoir appeler la base de donnée user
@@ -55,7 +56,6 @@ class UtilisateurController extends AbstractController
         $user = $this->getUser();
         $form = $this->createForm(NewPasswordFormType::class, $user);
         $form->handleRequest($request);
-        $panier = new Panier();// crée un panier
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
@@ -71,15 +71,8 @@ class UtilisateurController extends AbstractController
 
         }
 
-        if ($button->isSubmitted()) {
-            // faire un panier
-            $panier->setUserId(1);
-
-            $panier->setCatalogueId(1);
-
         return $this->render('utilisateur/forgot.html.twig', [
             'NewPassword' => $form->createView(),
         ]);
-        }
     }
 }
