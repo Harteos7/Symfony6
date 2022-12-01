@@ -2,29 +2,38 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CatalogueRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CatalogueRepository::class)]
+#[ApiResource(
+    collectionOperations: ['get' => ['normalization_context' => ['groups' => 'catalogue:list']], 'post' => ['normalization_context' => ['groups' => 'catalogue:list']]],
+    itemOperations: ['get' => ['normalization_context' => ['groups' => 'catalogue:item']], 'put' => ['normalization_context' => ['groups' => 'catalogue:item']], 'patch' => ['normalization_context' => ['groups' => 'catalogue:item']], 'delete' => ['normalization_context' => ['groups' => 'catalogue:item']]],
+    order: ['description' => 'DESC', 'nom' => 'ASC'],
+    paginationEnabled: false,
+)]
 class Catalogue
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['catalogue:list', 'catalogue:item'])]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $menus = null;
-
     #[ORM\Column(length: 50)]
+    #[Groups(['catalogue:list', 'catalogue:item'])]
     private ?string $image = null;
 
     #[ORM\Column(length: 150, nullable: true)]
+    #[Groups(['catalogue:list', 'catalogue:item'])]
     private ?string $description = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['catalogue:list', 'catalogue:item'])]
     private ?string $nom = null;
 
     #[ORM\ManyToOne(inversedBy: 'catalogues')]
@@ -42,18 +51,6 @@ class Catalogue
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getMenus(): ?int
-    {
-        return $this->menus;
-    }
-
-    public function setMenus(int $menus): self
-    {
-        $this->menus = $menus;
-
-        return $this;
     }
 
     public function getImage(): ?string

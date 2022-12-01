@@ -79,7 +79,7 @@ class UtilisateurController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/setp', name: 'app_setp')]
+     #[Route(path: '/setp', name: 'app_setp')]
     public function getp(User $user, Catalogue $catalogue, PanierRepository $panier, EntityManagerInterface $entityManager): Response
     {
         $panier = new Panier();
