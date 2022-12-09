@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221128080405 extends AbstractMigration
+final class Version20221205083250 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -28,6 +28,19 @@ final class Version20221128080405 extends AbstractMigration
         $this->addSql('ALTER TABLE catalogue ADD CONSTRAINT FK_59A699F5CCD7E912 FOREIGN KEY (menu_id) REFERENCES menu (id)');
         $this->addSql('ALTER TABLE panier ADD CONSTRAINT FK_24CC0DF29D86650F FOREIGN KEY (user_id_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE panier ADD CONSTRAINT FK_24CC0DF26758ECE6 FOREIGN KEY (catalogue_id_id) REFERENCES catalogue (id)');
+
+        $this->addSQl("INSERT INTO `user` (`id`, `email`, `roles`, `password`, `adresse`, `name`) VALUES
+        (1, 'test2@gmail.com', '[]', '\$2y\$13\$HBdxCorYZAlmG32XkrsbTu4w9saA6izs.y4ZqBeMzehVff8Bd4ITK', 'name', 'Yoann'),
+        (2, 'test@gmail.com', '[]', '\$2y\$13\$mzm.0H5rxrPGiJudXrZnBuuxQ310PH.2fcZKO0o1Ie/fWoalvT5mG', 'test', 'Yoann1'),
+        (3, 'johndoe@example.com', '[]', '\$2y\$13\$av5yRLdzPxIP0.8tOu0.lOxlMSrY6osyR40IJISZ4Sh2.W6ubDZTi', 'test', 'Johndoe')");
+
+        $this->addSQl("INSERT INTO `menu` (`id`, `image`, `nom`, `description`) VALUES
+        (1, '/build/images/burger.png', 'Burger', 'Un bon burger'),
+        (2, '/build/images/pizza.png', 'Pizza', 'Pizza cuite au feu')");
+
+        $this->addSQl("INSERT INTO `catalogue` (`id`, `menu_id`, `image`, `description`, `nom`) VALUES
+        (1, 1, '/build/images/miam1.png', 'un burgur', 'burgur'),
+        (2, 1, '/build/images/miam1.png', 'Un autre burgur', 'burgur 2')");
     }
 
     public function down(Schema $schema): void

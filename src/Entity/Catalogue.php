@@ -2,38 +2,48 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use App\Repository\CatalogueRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Metadata\Link;
 
 #[ORM\Entity(repositoryClass: CatalogueRepository::class)]
-#[ApiResource(
-    collectionOperations: ['get' => ['normalization_context' => ['groups' => 'catalogue:list']], 'post' => ['normalization_context' => ['groups' => 'catalogue:list']]],
-    itemOperations: ['get' => ['normalization_context' => ['groups' => 'catalogue:item']], 'put' => ['normalization_context' => ['groups' => 'catalogue:item']], 'patch' => ['normalization_context' => ['groups' => 'catalogue:item']], 'delete' => ['normalization_context' => ['groups' => 'catalogue:item']]],
-    order: ['description' => 'DESC', 'nom' => 'ASC'],
-    paginationEnabled: false,
-)]
+#[ApiResource(operations: [
+    new Get(),
+    new Put(),
+    new Patch(),
+    new Delete(),
+    new GetCollection(),
+    new Post(name: 'publication', uriTemplate: '/test',
+    uriVariables: [
+        'id' => new Link(
+            fromClass: Catalogue::class,
+            fromProperty: 'answer'
+        )
+    ],),
+])]
 class Catalogue
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['catalogue:list', 'catalogue:item'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['catalogue:list', 'catalogue:item'])]
     private ?string $image = null;
 
     #[ORM\Column(length: 150, nullable: true)]
-    #[Groups(['catalogue:list', 'catalogue:item'])]
     private ?string $description = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['catalogue:list', 'catalogue:item'])]
     private ?string $nom = null;
 
     #[ORM\ManyToOne(inversedBy: 'catalogues')]
